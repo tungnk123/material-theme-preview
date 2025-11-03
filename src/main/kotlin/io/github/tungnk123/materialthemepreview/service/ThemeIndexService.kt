@@ -78,7 +78,7 @@ class ThemeIndexService(private val project: Project) {
                             expression.valueArguments.forEach { arg ->
                                 val name = arg.getArgumentName()?.asName?.asString() ?: return@forEach
                                 val body = arg.getArgumentExpression()?.text ?: return@forEach
-                                val corner = Regex("RoundedCornerShape\\(([^\\)]+)\\)").find(body)?.groupValues?.get(1)
+                                val corner = Regex("RoundedCornerShape\\(([^)]+)\\)").find(body)?.groupValues?.get(1)
                                 if (corner != null) newShapes[name] = corner.trim()
                             }
                         }

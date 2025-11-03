@@ -1,32 +1,29 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>io.github.tungnk123.material-theme-preview</id>
-
-    <!-- Public plugin name should be written in Title Case.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
-    <name>Material-theme-preview</name>
+    <name>Material Theme Preview</name>
+    <vendor url="https://github.com/tungnk123">tungnk123</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
     <depends>org.jetbrains.kotlin</depends>
 
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
-
-    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
     <description><![CDATA[
-        Enter short description for your plugin here.<br>
-        <em>most HTML tags may be used</em>
+        Inline preview for MaterialTheme color / typography / shapes.
     ]]></description>
 
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
-    <depends>com.intellij.modules.platform</depends>
-
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.inlayProviderFactory
+                implementation="io.github.tungnk123.materialthemepreview.inlay.MaterialThemeInlayProviderFactory"/>
+    </extensions>
 
+    <extensions defaultExtensionNs="com.intellij">
+        <documentationProvider
+                implementation="io.github.tungnk123.materialthemepreview.doc.MaterialThemeDocProvider"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider
+                implementationClass="io.github.tungnk123.materialthemepreview.gutter.MaterialThemeGutterProvider"
+                language="kotlin"/>
     </extensions>
 </idea-plugin>

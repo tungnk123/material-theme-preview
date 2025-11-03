@@ -1,11 +1,12 @@
-package io.github.tungnk123.materialthemepreview.doc
+package io.github.tungnk123.materialthemepreview.gutter
 
 import com.intellij.codeInsight.daemon.LineMarkerInfo
 import com.intellij.codeInsight.daemon.LineMarkerProvider
-import com.intellij.codeInsight.daemon.GutterIconRenderer
+import com.intellij.openapi.editor.markup.GutterIconRenderer
 import com.intellij.psi.PsiElement
-import io.github.tungnk123.mtpreview.index.ThemeIndexService
-import io.github.tungnk123.mtpreview.util.KtMatchers
+import com.intellij.ui.JBColor
+import io.github.tungnk123.materialthemepreview.KtMatchers
+import io.github.tungnk123.materialthemepreview.service.ThemeIndexService
 import org.jetbrains.kotlin.psi.KtElement
 import java.awt.Color
 import java.awt.image.BufferedImage
@@ -31,7 +32,11 @@ class MaterialThemeGutterProvider : LineMarkerProvider {
     }
 
     private fun colorIcon(hex: String): Icon {
-        val c = try { Color(Integer.parseInt(hex.removePrefix("#"), 16)) } catch (_: Throwable) { Color.GRAY }
+        val c = try {
+            Color(Integer.parseInt(hex.removePrefix("#"), 16))
+        } catch (_: Throwable) {
+            JBColor.GRAY
+        }
         val img = BufferedImage(12, 12, BufferedImage.TYPE_INT_ARGB)
         val g = img.createGraphics()
         g.color = c; g.fillRoundRect(0, 0, 12, 12, 4, 4)
