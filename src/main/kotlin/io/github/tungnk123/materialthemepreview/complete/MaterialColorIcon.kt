@@ -34,6 +34,6 @@ class MaterialColorIcon(private val hexColor: String) : Icon {
     }.getOrNull()
 
     private companion object {
-        const val ICON_SIZE_DP = 10
+        const val ICON_SIZE_DP = 16
     }
 }
