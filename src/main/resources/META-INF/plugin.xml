@@ -16,6 +16,7 @@
                 implementation="io.github.tungnk123.materialthemepreview.inlay.MaterialThemeInlayProviderFactory"/>
     </extensions>
 
+
     <extensions defaultExtensionNs="com.intellij">
         <documentationProvider
                 implementation="io.github.tungnk123.materialthemepreview.doc.MaterialThemeDocProvider"/>
@@ -23,7 +24,15 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider
-                implementationClass="io.github.tungnk123.materialthemepreview.gutter.MaterialThemeGutterProvider"
-                language="kotlin"/>
+                language="kotlin"
+                implementationClass="io.github.tungnk123.materialthemepreview.gutter.MaterialThemeGutterProvider"/>
     </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor
+                language="kotlin"
+                order="first"
+                implementationClass="io.github.tungnk123.materialthemepreview.complete.MaterialThemeCompletionContributor"/>
+    </extensions>
+
 </idea-plugin>

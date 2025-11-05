@@ -44,6 +44,8 @@ class ThemeIndexService(private val project: Project) : DumbAware {
     }
 
     fun getColor(name: String) = colorScheme.colors[name]
+
+    fun allColors(): Map<String, String> = colorScheme.colors
     fun getTextStyle(name: String) = typography.textStyles[name]
     fun getShape(name: String) = shapes.corners[name]
     fun forceRebuild() = rebuildSafe()

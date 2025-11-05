@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
-    id("org.jetbrains.intellij.platform") version "2.7.1"
+    id("org.jetbrains.intellij.platform") version "2.10.4"
 }
 
 group = "io.github.tungnk123"
@@ -19,7 +19,6 @@ dependencies {
         bundledPlugins(
             "com.intellij.java", "org.jetbrains.kotlin"
         )
-
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
 }
