@@ -12,74 +12,92 @@ import org.jetbrains.kotlin.psi.KtQualifiedExpression
 
 class MaterialThemeCompletionContributor : CompletionContributor() {
 
-    private val log = Logger.getInstance(MaterialThemeCompletionContributor::class.java)
+    private val logger = Logger.getInstance(MaterialThemeCompletionContributor::class.java)
 
     init {
-        log.info("[MaterialThemeCompletionContributor] Initialized")
+        logger.info("[MaterialThemeCompletionContributor] Initialized")
+
         extend(
             CompletionType.BASIC,
             psiElement().withParent(KtNameReferenceExpression::class.java),
             object : CompletionProvider<CompletionParameters>() {
                 override fun addCompletions(
-                    parameters: CompletionParameters, context: ProcessingContext, result: CompletionResultSet
+                    parameters: CompletionParameters,
+                    context: ProcessingContext,
+                    result: CompletionResultSet
                 ) {
-                    val position = parameters.position
-                    log.info("[Completion] Triggered for element: ${position.text}")
+                    val caretLeaf = parameters.position
+                    logger.info("[Completion] Triggered for element: ${caretLeaf.text}")
 
-                    if (!isInColorSchemeContext(parameters)) {
-                        log.info("[Completion] Not inside MaterialTheme.colorScheme, skipping.")
+                    if (!isMaterialThemeColorSchemeContext(parameters)) {
+                        logger.info("[Completion] Not inside MaterialTheme.colorScheme, skipping.")
                         return
                     }
 
-                    val service = position.project.getService(ThemeIndexService::class.java)
-                    val colors = service.allColors()
-                    log.info("[Completion] Found ${colors.size} colors to suggest")
+                    val themeIndex = caretLeaf.project.getService(ThemeIndexService::class.java)
+                    val colorEntries = themeIndex.allColors()
+                    logger.info("[Completion] Found ${colorEntries.size} colors to suggest")
 
-                    colors.forEach { (name, hex) ->
-                        val element = MaterialColorLookup.build(name, hex)
-                        result.addElement(PrioritizedLookupElement.withPriority(element, COMPLETION_PRIORITY))
-                        log.info("[Completion] Added suggestion: $name = $hex")
+                    colorEntries.forEach { (colorName, hexColor) ->
+                        val lookup = MaterialColorLookup.build(colorName, hexColor)
+                        result.addElement(
+                            PrioritizedLookupElement.withPriority(lookup, COMPLETION_PRIORITY)
+                        )
+                        logger.info("[Completion] Added suggestion: $colorName = $hexColor")
                     }
 
-                    log.info("[Completion] Finished adding completions.")
+                    logger.info("[Completion] Finished adding completions.")
                 }
-            })
+            }
+        )
     }
 
-    private fun isInColorSchemeContext(p: CompletionParameters): Boolean {
-        val nameRef = p.position.parent as? KtNameReferenceExpression ?: return false
-        var qualified = nameRef.parent as? KtQualifiedExpression ?: return false
-        while (qualified.parent is KtQualifiedExpression) {
-            qualified = qualified.parent as KtQualifiedExpression
+    private fun isMaterialThemeColorSchemeContext(parameters: CompletionParameters): Boolean {
+        val nameReference = parameters.position.parent as? KtNameReferenceExpression ?: return false
+        var topQualified = nameReference.parent as? KtQualifiedExpression ?: return false
+
+        while (topQualified.parent is KtQualifiedExpression) {
+            topQualified = topQualified.parent as KtQualifiedExpression
         }
 
-        val raw = collectQualifiedNames(qualified)
-        val parts = raw.map { it.replace(COMPLETION_TOKEN, "") }.filter { it.isNotEmpty() }
-        log.info("[Context] parts=$parts, raw=$raw, expr='${qualified.text}'")
+        val rawSegments = collectQualifiedNameSegments(topQualified)
+        val cleanedSegments = rawSegments
+            .map { it.replace(PLACEHOLDER_TOKEN, "") }
+            .filter { it.isNotEmpty() }
 
-        val ok = parts.getOrNull(0) == "MaterialTheme" && parts.getOrNull(1) == "colorScheme"
-        log.info("[Context] chainOK=$ok (head=${parts.getOrNull(0)}, second=${parts.getOrNull(1)})")
-        return ok
+        logger.info("[Context] parts=$cleanedSegments, raw=$rawSegments, expr='${topQualified.text}'")
+
+        val head = cleanedSegments.getOrNull(0)
+        val second = cleanedSegments.getOrNull(1)
+        val isColorChain = head == "MaterialTheme" && second == "colorScheme"
+
+        logger.info("[Context] chainOK=$isColorChain (head=$head, second=$second)")
+        return isColorChain
     }
 
-    private fun collectQualifiedNames(q: KtQualifiedExpression): List<String> {
-        val out = mutableListOf<String>()
-        fun visit(e: KtExpression?) {
-            when (e) {
+    private fun collectQualifiedNameSegments(qualified: KtQualifiedExpression): List<String> {
+        val segments = mutableListOf<String>()
+
+        fun visit(expression: KtExpression?) {
+            when (expression) {
                 is KtQualifiedExpression -> {
-                    visit(e.receiverExpression); visit(e.selectorExpression)
+                    visit(expression.receiverExpression)
+                    visit(expression.selectorExpression)
                 }
 
-                is KtNameReferenceExpression -> out += e.getReferencedName()
-                is KtCallExpression -> (e.calleeExpression as? KtNameReferenceExpression)?.let { out += it.getReferencedName() }
+                is KtNameReferenceExpression -> segments += expression.getReferencedName()
+                is KtCallExpression ->
+                    (expression.calleeExpression as? KtNameReferenceExpression)
+                        ?.let { segments += it.getReferencedName() }
             }
         }
-        visit(q)
-        return out
+
+        visit(qualified)
+        return segments
     }
 
     private companion object {
-        const val COMPLETION_TOKEN = "IntellijIdeaRulezzz"
+        const val PLACEHOLDER_TOKEN = "IntellijIdeaRulezzz"
         const val COMPLETION_PRIORITY = 1000.0
     }
 }
