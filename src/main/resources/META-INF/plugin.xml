@@ -16,10 +16,8 @@
                 implementation="io.github.tungnk123.materialthemepreview.inlay.MaterialThemeInlayProviderFactory"/>
     </extensions>
 
-
     <extensions defaultExtensionNs="com.intellij">
-        <documentationProvider
-                implementation="io.github.tungnk123.materialthemepreview.doc.MaterialThemeDocProvider"/>
+        <documentationProvider implementation="io.github.tungnk123.materialthemepreview.doc.MaterialThemeDocProvider"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
