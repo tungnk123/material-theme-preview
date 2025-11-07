@@ -74,7 +74,7 @@ class MaterialThemeInlayProvider : InlayHintsProvider<NoSettings> {
                         sink.addInlineElement(
                             element.textRange.endOffset,
                             false,
-                            factory.roundWithBackground(factory.text(shapeText)),
+                            factory.roundWithBackground(factory.text("$shapeText dp")),
                             false
                         )
                     }
