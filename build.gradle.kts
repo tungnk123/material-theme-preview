@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        create("IC", "2024.2.4")
+        create("IC", "2025.1.2")
 
         bundledPlugins(
             "com.intellij.java", "org.jetbrains.kotlin"
@@ -37,6 +37,14 @@ tasks {
         sourceCompatibility = "21"
         targetCompatibility = "21"
         options.encoding = "UTF-8"
+    }
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "21"
+            languageVersion = "2.1"
+            apiVersion = "2.1"
+            freeCompilerArgs = listOf("-Xcontext-receivers")
+        }
     }
 }
 

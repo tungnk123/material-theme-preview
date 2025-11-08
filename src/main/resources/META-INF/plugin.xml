@@ -11,13 +11,18 @@
         Inline preview for MaterialTheme color / typography / shapes.
     ]]></description>
 
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK2="true" />
+    </extensions>
+
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.inlayProviderFactory
                 implementation="io.github.tungnk123.materialthemepreview.inlay.MaterialThemeInlayProviderFactory"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <documentationProvider implementation="io.github.tungnk123.materialthemepreview.doc.MaterialThemeDocProvider"/>
+        <platform.backend.documentation.targetProvider
+                implementation="io.github.tungnk123.materialthemepreview.doc.MaterialThemeDocTargetProvider"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
