@@ -15,10 +15,23 @@ Enhance your Android & Kotlin development experience with **real-time Material D
 
 ### 🖼️ Screenshots
 
-| Inline Preview | Gutter Marker | Smart Autocomplete |
-|:---------------:|:-------------:|:------------------:|
-| ![Inline](https://raw.githubusercontent.com/tungnk123/material-theme-preview/main/docs/example-1.png) | ![Gutter](https://raw.githubusercontent.com/tungnk123/material-theme-preview/main/docs/example-2.png) | ![Autocomplete](https://raw.githubusercontent.com/tungnk123/material-theme-preview/main/docs/example-3.png) |
+<p align="center">
+  <img src="docs/example-1.png" alt="Inline preview" width="1000">
+  <br/>
+  <sub>Inline color & typography preview</sub>
+</p>
 
+<p align="center">
+  <img src="docs/example-2.png" alt="Inline preview" width="1000">
+  <br/>
+  <sub>Code completion with color scheme</sub>
+</p>
+
+<p align="center">
+  <img src="docs/example-3.png" alt="Inline preview" width="1000">
+  <br/>
+  <sub>Code completion with shapes</sub>
+</p>
 
 ### 🧩 Installation
 
