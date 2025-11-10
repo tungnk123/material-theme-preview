@@ -8,11 +8,31 @@
     <depends>org.jetbrains.kotlin</depends>
 
     <description><![CDATA[
-        Inline preview for MaterialTheme color / typography / shapes.
-    ]]></description>
+        <b>Material Theme Preview</b> enhances the Kotlin coding experience by adding inline previews
+        for <code>MaterialTheme</code> components in Jetpack Compose.<br/><br/>
+
+        <b>Features:</b><br/>
+        <ul>
+          <li><b>Color Previews:</b> Instantly see the hex value and color swatch next to
+              <code>MaterialTheme.colorScheme</code> references.</li>
+          <li><b>Typography Details:</b> Display text size and line height hints for
+              <code>MaterialTheme.typography</code> styles.</li>
+          <li><b>Shape Info:</b> Show concise shape descriptions (e.g., corner radius) for
+              <code>MaterialTheme.shapes</code>.</li>
+          <li><b>Color Gutter Icons:</b> A color square appears in the gutter beside color references
+              for quick visual scanning.</li>
+          <li><b>Smart Completion:</b> Enhanced autocompletion for <code>colorScheme</code>,
+              <code>typography</code>, and <code>shapes</code> properties, with color previews in the list.</li>
+          <li><b>Documentation Popups:</b> Hover any MaterialTheme property to see detailed visual info.</li>
+        </ul>
+
+        <b>Supported:</b> IntelliJ IDEA 2024.2+ and Kotlin plugin (K1 & K2 mode).<br/>
+        <b>Author:</b> <a href="https://github.com/tungnk123">tungnk123</a><br/>
+]]></description>
+
 
     <extensions defaultExtensionNs="org.jetbrains.kotlin">
-        <supportsKotlinPluginMode supportsK2="true" />
+        <supportsKotlinPluginMode supportsK2="true"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
