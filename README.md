@@ -1,33 +1,35 @@
 # 🧩 Material Theme Preview
 
-**Material Theme Preview** is an IntelliJ plugin that enhances the Android and Kotlin development experience by providing real-time visual previews of Material Design components directly in your editor.
+Enhance your Android & Kotlin development experience with **real-time Material Design previews** right inside your editor.
 
 ---
 
-## ✨ Features
+### ✨ Features
 
-- 🎨 **Color Previews** — Inline color squares for `MaterialTheme.colorScheme.*`
-- 🅰️ **Typography Previews** — Show font size and line height for `MaterialTheme.typography.*`
-- 🧱 **Shape Previews** — Display shape corner radii from `MaterialTheme.shapes.*`
-- 🧩 **Completion Enhancements** — Smarter autocompletion with color chips and style hints
-- 💡 **Documentation Hints** — Quick inline docs for colors, typography, and shapes
-- ⚡ **K2-Mode Compatible** — Fully supports Kotlin’s new compiler frontend
+- 🎨 Inline color squares for `MaterialTheme.colorScheme.*`
+- 🅰️ Typography previews showing font size & line height
+- 🧱 Shape previews with corner radius visualization
+- 💡 Smart autocompletion with visual hints
+- ⚡ Compatible with Kotlin K2 mode
 
----
 
-## 🖼️ Screenshots
+### 🖼️ Screenshots
 
-| Color & Typography Inlay | Gutter Color Marker | Autocomplete |
-|:--------------------------:|:-------------------:|:-------------:|
-| ![color-preview](docs/color-preview.png) | ![gutter-icon](docs/gutter-icon.png) | ![completion](docs/completion.png) |
+| Inline Preview | Gutter Marker | Smart Autocomplete |
+|:---------------:|:-------------:|:------------------:|
+| ![Inline](https://raw.githubusercontent.com/tungnk123/material-theme-preview/main/docs/example-1.png) | ![Gutter](https://raw.githubusercontent.com/tungnk123/material-theme-preview/main/docs/example-2.png) | ![Autocomplete](https://raw.githubusercontent.com/tungnk123/material-theme-preview/main/docs/example-3.png) |
 
----
 
-## 🧠 How It Works
+### 🧩 Installation
 
-Material Theme Preview scans your Compose or Android Kotlin files for `MaterialTheme` references, such as:
+1. Open **Settings → Plugins → Marketplace**
+2. Search for “Material Theme Preview”
+3. Click **Install**
 
-```kotlin
-color = MaterialTheme.colorScheme.primary
-style = MaterialTheme.typography.titleMedium
-shape = MaterialTheme.shapes.small
+or manually:  
+Download `.zip` from [GitHub Releases](https://github.com/tungnk123/material-theme-preview/releases)
+
+
+### ⚖️ License
+Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
+© 2025 tungnk123
